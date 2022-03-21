@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 
 namespace Ivory.TesteEstagio.CampoMinado
 {
@@ -29,7 +28,7 @@ namespace Ivory.TesteEstagio.CampoMinado
             //primeiramente crio uma matriz contendo o tabuleiro para fazer as comparações
             var campo = "";
             char[,] matrizCampo = new char[9,9];
-            var cont = 0;
+            var contador = 0;
 
             //enquanto não ganharmos vamos ter que ficar jogando.
             while (campoMinado.JogoStatus == 0)
@@ -41,11 +40,11 @@ namespace Ivory.TesteEstagio.CampoMinado
                 {
                     for (int j = 0; j < 9; j++)
                     {
-                        matrizCampo[i, j] = campo[cont];
-                        cont++;
+                        matrizCampo[i, j] = campo[contador];
+                        contador++;
                     }
                 }
-                cont = 0;
+                contador = 0;
                 //for para percorrer a matriz e posicionar as bandeiras
                 for (int i = 0; i < 9; i++)
                 {
@@ -84,7 +83,7 @@ namespace Ivory.TesteEstagio.CampoMinado
             // campo[linha-1,coluna-1] , campo[linha-1,coluna] ,campo[linha-1,coluna+1]
             // campo[linha,coluna-1] , célula a verificar!! ,campo[linha,coluna+1]
             // campo[linha+1,coluna-1] , campo[linha+1,coluna] ,campo[linha+1,coluna+1]
-            var qtdCasasVazias = 0;
+            var quantidadeCasasVazias = 0;
             var valorCelula = (int)Char.GetNumericValue(campo[linha, coluna]);
             
             if(campo[linha,coluna] != '0' && campo[linha,coluna] != '-'){
@@ -97,12 +96,12 @@ namespace Ivory.TesteEstagio.CampoMinado
                         {
                             if (campo[l, c] == '-')
                             {
-                                qtdCasasVazias++;
+                                quantidadeCasasVazias++;
                             }
                         }
                     }
                 }
-                if(valorCelula == qtdCasasVazias){
+                if(valorCelula == quantidadeCasasVazias){
                     for (int l = linha - 1; l < linha + 2; l++)
                     {
                         for (int c = coluna - 1; c < coluna + 2; c++)
@@ -127,7 +126,7 @@ namespace Ivory.TesteEstagio.CampoMinado
         //Funcao para abrir as ce
         public static void AbrirCelulas(CampoMinado campoMinado,char[,] campo, char[,] bombas, int linha, int coluna)
         {
-            var qtdMinas = 0;
+            var quantidadeMinas = 0;
             var valorCelula = (int)Char.GetNumericValue(campo[linha, coluna]);
 
             //para abrir as celulas precisamos primeiro contar a quantidade de bombas ao redor da celula
@@ -143,13 +142,13 @@ namespace Ivory.TesteEstagio.CampoMinado
                         {
                             if (bombas[l, c] == 'B')
                             {
-                                qtdMinas++;
+                                quantidadeMinas++;
                             }
                         }
                     }
                 }
                 // após fazer a contagem percorremos novamente as células ao redor da atual e abrimos os espaços que não contem bandeira, ou seja, que não tem mina
-                if (valorCelula == qtdMinas)
+                if (valorCelula == quantidadeMinas)
                 {
                     for (int l = linha - 1; l < linha + 2; l++)
                     {
